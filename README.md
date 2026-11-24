@@ -1,5 +1,11 @@
 # Applied Machine Learning (AAI-695)
 
+<!-- live-page:start -->
+<p align="center"><a href="https://hossbh.github.io/Applied-Machine-Learning_AAI-695/"><img src="docs/assets/readme-banner.svg" width="100%" alt="Open the machine learning labs: https://hossbh.github.io/Applied-Machine-Learning_AAI-695/"></a></p>
+
+<p align="center"><b>▶ Live interactive page: <a href="https://hossbh.github.io/Applied-Machine-Learning_AAI-695/">hossbh.github.io/Applied-Machine-Learning_AAI-695</a></b></p>
+<!-- live-page:end -->
+
 Hands-on machine learning, implemented both from first principles in NumPy and with scikit-learn and TensorFlow. The work progresses from curve fitting to a backpropagation neural network. It ends with a project that predicts the material category of 3D CAD parts.
 
 ## Notebooks

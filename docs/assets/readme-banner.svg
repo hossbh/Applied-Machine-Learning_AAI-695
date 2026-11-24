@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 220" width="1200" height="220" role="img" aria-label="Open the machine learning labs: hossbh.github.io/Applied-Machine-Learning_AAI-695">
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#7aa0e6" stroke-opacity=".08"/></pattern>
+    <pattern id="G" width="120" height="120" patternUnits="userSpaceOnUse"><path d="M120 0H0V120" fill="none" stroke="#7aa0e6" stroke-opacity=".14"/></pattern>
+    <linearGradient id="s" x1="0" x2="1"><stop offset="0" stop-color="#3fcff0"/><stop offset=".5" stop-color="#f5bb46"/><stop offset="1" stop-color="#ff7f5e"/></linearGradient>
+    <radialGradient id="glow" cx=".86" cy=".3" r=".55"><stop offset="0" stop-color="#ff7f5e" stop-opacity=".22"/><stop offset="1" stop-color="#ff7f5e" stop-opacity="0"/></radialGradient>
+    <clipPath id="c"><rect width="1200" height="220" rx="18"/></clipPath>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect width="1200" height="220" fill="#07122a"/>
+    <rect width="1200" height="220" fill="url(#g)"/>
+    <rect width="1200" height="220" fill="url(#G)"/>
+    <rect width="1200" height="220" fill="url(#glow)"/>
+    <rect width="1200" height="5" fill="url(#s)"/>
+  </g>
+  <rect x=".5" y=".5" width="1199" height="219" rx="18" fill="none" stroke="#2a4576"/>
+  <text x="56" y="68" font-family="Consolas, 'SFMono-Regular', Menlo, monospace" font-size="16" letter-spacing="3" fill="#8293b3">INTERACTIVE PAGE · RUNS IN YOUR BROWSER</text>
+  <text x="56" y="120" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="40" font-weight="700" fill="#eef3fb">Open the machine learning labs</text>
+  <text x="56" y="160" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="21" fill="#b4c2db">Model order · gradient descent · K-means, step by step</text>
+  <rect x="926" y="84" width="218" height="58" rx="12" fill="#ff7f5e"/>
+  <text x="1035" y="121" text-anchor="middle" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#061229">Open it  →</text>
+  <text x="1035" y="172" text-anchor="middle" font-family="Consolas, 'SFMono-Regular', Menlo, monospace" font-size="15" fill="#8293b3">hossbh.github.io/Applied-Machine-Learn…</text>
+</svg>
