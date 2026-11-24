@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applied machine learning labs · Hossein Basereh</title>
+<meta name="description" content="Interactive labs from AAI-695: polynomial model order, gradient descent, and K-means clustering from scratch, with the results of the neural-network, decision-tree and CAD material projects.">
+<meta name="author" content="Hossein Basereh">
+<meta name="theme-color" content="#07122a">
+<meta property="og:title" content="Applied machine learning labs · Hossein Basereh">
+<meta property="og:description" content="Interactive labs from AAI-695: polynomial model order, gradient descent, and K-means clustering from scratch, with the results of the neural-network, decision-tree and CAD material projects.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem('hb-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-accent="ember">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-maut" viewBox="0 0 24 24"><path d="M12 3.5v16.5M7.5 20h9M4.5 7h15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4.5 7l-2.6 6.2h5.2zM19.5 7l-2.6 6.2h5.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-stats" viewBox="0 0 24 24"><path d="M3 19.5h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3.5 18.5c3.4 0 4.6-12 8.5-12s5.1 12 8.5 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-data" viewBox="0 0 24 24"><path d="M3 20h18M6 20v-8M11 20V5M16 20v-6M20 20V9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-ml" viewBox="0 0 24 24"><path d="M6 6l6 6M6 18l6-6M12 12l6-6M12 12l6 6" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="6" r="2.4" fill="currentColor"/><circle cx="5" cy="18" r="2.4" fill="currentColor"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="6" r="2.4" fill="currentColor"/><circle cx="19" cy="18" r="2.4" fill="currentColor"/></symbol>
+  <symbol id="i-beam" viewBox="0 0 24 24"><path d="M5 5h14M5 19h14M12 5v14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 15V4M7 9l5-5 5 5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="9" r="1.5" fill="currentColor"/><circle cx="15" cy="15" r="1.5" fill="currentColor"/><circle cx="15" cy="9" r="1.5" fill="currentColor"/><circle cx="9" cy="15" r="1.5" fill="currentColor"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5l12 7-12 7z" fill="currentColor"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+</svg>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav ink">
+  <div class="wrap">
+    <a class="brand" href="https://github.com/hossbh" aria-label="Hossein Basereh on GitHub">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x=".5" y=".5" width="31" height="31" rx="7.5" fill="#0e2a5c" stroke="#2a4576"/><path d="M7.5 7v13M7.5 13.5H13M13 7v13M17 7h3.8a3.1 3.1 0 0 1 0 6.2H17M17 13.2h4.3a3.4 3.4 0 0 1 0 6.8H17V7" fill="none" stroke="#fff" stroke-width="2.1" stroke-linejoin="round"/><path d="M7 25.5h5.5" stroke="#3fcff0" stroke-width="2.4"/><path d="M13.25 25.5h5.5" stroke="#f5bb46" stroke-width="2.4"/><path d="M19.5 25.5H25" stroke="#ff7f5e" stroke-width="2.4"/></svg>
+      <span class="brand-name"><b>Hossein Basereh</b><small>Projects</small></span>
+    </a>
+    <nav class="links" id="siteLinks" aria-label="On this page">
+      <a href="#polynomial">Model order</a>
+      <a href="#descent">Gradient descent</a>
+      <a href="#kmeans">K-means</a>
+      <a href="#results">Results</a>
+      <a href="#notebooks">Notebooks</a>
+      <div class="m-only">
+        <a href="https://hossbh.github.io/MAUT/">MAUT decision model</a>
+        <a href="https://hossbh.github.io/Probability-and-Statistics_SYS-501/">Probability & statistics</a>
+        <a href="https://hossbh.github.io/Data-Analysis_SYS-930/">Data analysis</a>
+        <a href="https://beamworkbench.com">Engineering workbenches</a>
+        <a href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695">Source on GitHub</a>
+      </div>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn theme-btn" id="themeBtn" type="button" data-mode="auto" aria-label="Theme: follow system. Click to change." title="Theme: follow system">
+        <svg class="t-auto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
+        <svg class="t-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg class="t-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+      <a class="icon-btn" href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695" title="Source on GitHub" aria-label="Source on GitHub"><svg class="" aria-hidden="true"><use href="#i-code"/></svg></a>
+      <details class="launch">
+        <summary class="btn sm">Projects <svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+        <div class="menu">
+          <div class="grp">Projects</div>
+          <a href="https://hossbh.github.io/MAUT/" style="--c:var(--violet)"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-maut"/></svg></span><b>MAUT decision model</b><span class="sub">Criteria, weights and Monte Carlo ranking</span></a>
+          <a href="https://hossbh.github.io/Probability-and-Statistics_SYS-501/" style="--c:var(--cyan)"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-stats"/></svg></span><b>Probability & statistics</b><span class="sub">Distributions, simulation and tests</span></a>
+          <a href="https://hossbh.github.io/Data-Analysis_SYS-930/" style="--c:var(--green)"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-data"/></svg></span><b>Data analysis</b><span class="sub">Exploratory analysis in the browser</span></a>
+          <a href="https://hossbh.github.io/Applied-Machine-Learning_AAI-695/" style="--c:var(--ember)" aria-current="page"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-ml"/></svg></span><b>Applied machine learning</b><span class="sub">Regression, gradient descent, K-means</span></a>
+          <div class="grp">Engineering</div>
+          <a href="https://beamworkbench.com" style="--c:var(--cyan)"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-beam"/></svg></span><b>Beam · Bolt · Weld workbenches</b><span class="sub">beamworkbench.com</span></a>
+        </div>
+      </details>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="siteLinks">
+        <svg class="bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<style>
+  .lab2 { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 22px; align-items: start; }
+  .lab2 .fields { grid-template-columns: minmax(0, 1fr); }
+  .charts2 { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px; }
+  .k2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 16px 0 0; }
+  .k2 div { padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel-2); }
+  .k2 .k { display: block; font-size: 12.5px; color: var(--ink-3); }
+  .k2 .v { display: block; margin-top: 2px; font: 700 19px/1.25 var(--f-head); }
+  .k2 .v small { font: 500 12px var(--f-ui); color: var(--ink-3); }
+  .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chart-t { margin: 0 0 6px; font: 600 14px var(--f-ui); }
+  .say { margin: 14px 0 0; font-size: 14.5px; color: var(--ink); }
+  .nbgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+  .nbgrid .card { padding: 18px; }
+  .nbgrid .card h3 { font-size: 16px; }
+  @media (max-width: 1000px) { .lab2, .charts2 { grid-template-columns: minmax(0, 1fr); } .lab2 .fields { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
+</style>
+
+<section class="hero ink">
+  <div class="wrap">
+    <div>
+      <p class="crumb"><b>AAI-695</b> Applied machine learning</p>
+      <h1>Machine learning,<br><span class="hl">from first principles.</span></h1>
+      <p class="lede">My machine-learning notebooks build the algorithms in NumPy before reaching for scikit-learn and TensorFlow: curve fitting, gradient descent, decision trees, a neural network and K-means. Three of them run here, in your browser, so you can change the data and the settings and watch what happens.</p>
+      <div class="cta"><a class="btn acc" href="#polynomial">Open the labs <span class="arr" aria-hidden="true">→</span></a><a class="btn ghost" href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695">View on GitHub</a></div>
+      <ul class="facts"><li>NumPy from scratch</li><li>scikit-learn</li><li>TensorFlow · Keras</li></ul>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><div><h3>Results</h3><p>Accuracy reported in the notebooks</p></div></div>
+      <div class="panel-b"><div id="heroRes"></div></div>
+      <div class="panel-f">K-means accuracy labels each cluster with its most common digit, on the training images.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="polynomial">
+  <div class="wrap">
+    <div class="rv"><p class="kicker">Notebook 01 · Lab</p><h2>How complex should the model be?</h2><p class="sub">Noisy samples of a cubic, y = 2x + 11x² + 3x³, fitted with polynomials of order 1 to 8, as in the notebook. The error on the training data keeps falling with order; the error on fresh data from the same source shows where extra order stops helping.</p></div>
+    <div class="panel"><div class="panel-b lab2">
+      <div>
+        <div class="fields">
+          <div class="field"><span class="lbl">Polynomial order, m</span><div class="seg" id="pOrder" role="group" aria-label="Polynomial order"><button type="button" data-m="1">1</button><button type="button" data-m="2">2</button><button type="button" data-m="3" aria-pressed="true">3</button><button type="button" data-m="4">4</button><button type="button" data-m="5">5</button><button type="button" data-m="6">6</button><button type="button" data-m="7">7</button><button type="button" data-m="8">8</button></div></div>
+          <div class="field"><label for="pNoise">Noise scale <output id="pNoiseO"></output></label><input type="range" id="pNoise" min="0" max="1000" step="25" value="100"></div>
+          <div class="field"><label for="pN">Samples <output id="pNO"></output></label><input type="range" id="pN" min="10" max="100" step="5" value="50"></div>
+        </div>
+        <div class="btns"><button class="btn ghost sm" type="button" id="pNew"><svg class="i" aria-hidden="true"><use href="#i-dice"/></svg>New sample</button></div>
+        <div class="k2" id="pOut"></div>
+      </div>
+      <div class="charts2">
+        <div><p class="chart-t">Data and fitted polynomial</p><div id="pFit"></div></div>
+        <div><p class="chart-t">Error against order</p><div id="pMse"></div><p class="chart-cap">Mean squared error on a log scale.</p></div>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<section class="band" id="descent">
+  <div class="wrap">
+    <div class="rv"><p class="kicker">Notebook 02 · Lab</p><h2>Normal equation against gradient descent</h2><p class="sub">The same straight line found three ways: in closed form, by batch gradient descent and by stochastic gradient descent, with an 80/20 train/test split. The notebook's data file is not in the repository, so this lab draws a sample shaped like it (y ≈ −3.90 + 1.19x, 97 points).</p></div>
+    <div class="panel"><div class="panel-b lab2">
+      <div>
+        <div class="fields">
+          <div class="field"><label for="gAlpha">Learning rate</label><select class="in" id="gAlpha"><option>0.001</option><option>0.002</option><option>0.004</option><option>0.006</option><option>0.008</option><option selected>0.01</option><option>0.015</option><option>0.02</option></select></div>
+          <div class="field"><label for="gIter">Iterations (epochs) <output id="gIterO"></output></label><input type="range" id="gIter" min="50" max="5000" step="50" value="1500"></div>
+          <div class="field"><label for="gNoise">Noise σ <output id="gNoiseO"></output></label><input type="range" id="gNoise" min="0.5" max="6" step="0.25" value="3"></div>
+        </div>
+        <div class="btns"><button class="btn ghost sm" type="button" id="gNew"><svg class="i" aria-hidden="true"><use href="#i-dice"/></svg>New sample</button></div>
+        <div class="k2" id="gOut"></div>
+      </div>
+      <div class="charts2">
+        <div><p class="chart-t">The fitted lines</p><div id="gFit"></div></div>
+        <div><p class="chart-t">Test error while training</p><div id="gMse"></div><p class="chart-cap">Mean squared error on the 20 % test set, log scale.</p></div>
+      </div>
+    </div></div>
+    <p class="say rv" id="gSay"></p>
+  </div>
+</section>
+
+<section class="band" id="kmeans">
+  <div class="wrap">
+    <div class="rv"><p class="kicker">Notebook 05 · Lab</p><h2>K-means clustering, one step at a time</h2><p class="sub">The notebook's algorithm: pick K points as starting centroids, assign every point to its nearest centroid, move each centroid to the mean of its points, and repeat until nothing changes. Step through it, or let it run.</p></div>
+    <div class="panel"><div class="panel-b lab2">
+      <div>
+        <div class="fields">
+          <div class="field"><label for="kBlobs">Groups in the data <output id="kBlobsO"></output></label><input type="range" id="kBlobs" min="2" max="5" step="1" value="2"></div>
+          <div class="field"><label for="kSpread">Spread, σ <output id="kSpreadO"></output></label><input type="range" id="kSpread" min="0.3" max="2.5" step="0.1" value="1"></div>
+          <div class="field"><label for="kPer">Points per group <output id="kPerO"></output></label><input type="range" id="kPer" min="20" max="300" step="10" value="100"></div>
+          <div class="field"><label for="kK">Clusters, K <output id="kKO"></output></label><input type="range" id="kK" min="1" max="6" step="1" value="2"></div>
+        </div>
+        <div class="btns">
+          <button class="btn acc sm" type="button" id="kStep">Step</button>
+          <button class="btn ghost sm" type="button" id="kRun"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>Run</button>
+          <button class="btn ghost sm" type="button" id="kInit"><svg class="i" aria-hidden="true"><use href="#i-dice"/></svg>New start</button>
+        </div>
+        <div class="k2" id="kOut"></div>
+      </div>
+      <div class="charts2">
+        <div><p class="chart-t">Points and centroids</p><div id="kPlot"></div></div>
+        <div>
+          <p class="chart-t">Choosing K: the elbow</p><div id="kElbow"></div><p class="chart-cap">Inertia, the sum of squared distances to the nearest centroid, for K = 1 to 8 (best of five starts). The bend marks a good K.</p>
+        </div>
+      </div>
+    </div></div>
+    <div class="panel rv" style="margin-top:16px">
+      <div class="panel-h"><div><h3>On MNIST digits</h3><p>Mini-Batch K-means on the 60,000 training images, each cluster labelled with its most common digit</p></div></div>
+      <div class="panel-b"><div id="kMnist"></div><p class="chart-cap">More clusters capture more ways of writing each digit, so labelling accuracy rises with K.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="results">
+  <div class="wrap">
+    <div class="rv"><p class="kicker">Beyond the labs</p><h2>Networks, trees and a CAD project</h2><p class="sub">These notebooks need their datasets and trained models, so they are summarised here with the results they reached.</p></div>
+    <div class="grid">
+      <div class="card rv"><span class="tag">04 · NumPy</span><h3>Neural network from scratch</h3><p>A two-hidden-layer (128–64) network written in NumPy, with backpropagation, classifying handwritten digits.</p><div class="res"><b>97.6 %</b> accuracy on the 10,000-image MNIST test set.</div></div>
+      <div class="card rv"><span class="tag">03 · scikit-learn</span><h3>Decision trees and random forests</h3><p>Titanic survival from class, sex, age and family aboard, with pruning and a random forest.</p><div class="res"><b>78 %</b> test accuracy for both the pruned tree and the forest.</div></div>
+      <div class="card rv"><span class="tag">06 · Keras</span><h3>Diabetes prediction</h3><p>A dense neural network predicting diabetes onset from eight clinical measurements in the Pima Indians dataset.</p><div class="res"><b>64.9 %</b> test accuracy.</div></div>
+      <div class="card rv"><span class="tag">07 · Project</span><h3>Material of 3D CAD parts</h3><p>Part-level features extracted from the Autodesk Fusion 360 Gallery assemblies, cleaned, and used to compare four classifiers.</p><div class="res">Random forest is best: <b>81 %</b> accuracy after tuning.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="notebooks">
+  <div class="wrap">
+    <div class="rv"><p class="kicker">The notebooks</p><h2>Eight notebooks on GitHub</h2><p class="sub">Graduate coursework in applied machine learning. The datasets are not included in the repository; the README lists the files each notebook needs.</p></div>
+    <div class="nbgrid">
+      <a class="card" href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695/blob/main/01_polynomial.ipynb"><span class="tag">01</span><h3>Polynomial regression and model order</h3><span class="go">Open →</span></a>
+      <a class="card" href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695/blob/main/02_linear%20regression.ipynb"><span class="tag">02</span><h3>Normal equation vs gradient descent</h3><span class="go">Open →</span></a>
+      <a class="card" href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695/blob/main/03_decision%20tree.ipynb"><span class="tag">03</span><h3>Decision trees, pruning and random forests</h3><span class="go">Open →</span></a>
+      <a class="card" href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695/blob/main/04_neural%20network.ipynb"><span class="tag">04</span><h3>Neural network from scratch: MNIST</h3><span class="go">Open →</span></a>
+      <a class="card" href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695/blob/main/05_K-means%20clustering.ipynb"><span class="tag">05</span><h3>K-means clustering from scratch</h3><span class="go">Open →</span></a>
+      <a class="card" href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695/blob/main/06_diabetes.ipynb"><span class="tag">06</span><h3>Diabetes prediction with Keras</h3><span class="go">Open →</span></a>
+      <a class="card" href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695/blob/main/07_MC1_%20Data%20Cleaning.ipynb"><span class="tag">07 · Phase 1</span><h3>CAD material prediction: data cleaning</h3><span class="go">Open →</span></a>
+      <a class="card" href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695/blob/main/07_MC2%20_Prediction%20Model.ipynb"><span class="tag">07 · Phase 2</span><h3>CAD material prediction: model comparison</h3><span class="go">Open →</span></a>
+    </div>
+    <p class="muted" style="font-size:14px;margin-top:24px">Shared as a portfolio of applied analysis. If you are taking a similar course, please follow your institution's academic-integrity policy. Assignment prompts and third-party datasets remain the property of their original authors.</p>
+  </div>
+</section>
+</main>
+
+<footer class="site ink">
+  <div class="wrap f-top">
+    <div class="f-brand">
+      <a class="brand" href="https://github.com/hossbh"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x=".5" y=".5" width="31" height="31" rx="7.5" fill="#0e2a5c" stroke="#2a4576"/><path d="M7.5 7v13M7.5 13.5H13M13 7v13M17 7h3.8a3.1 3.1 0 0 1 0 6.2H17M17 13.2h4.3a3.4 3.4 0 0 1 0 6.8H17V7" fill="none" stroke="#fff" stroke-width="2.1" stroke-linejoin="round"/><path d="M7 25.5h5.5" stroke="#3fcff0" stroke-width="2.4"/><path d="M13.25 25.5h5.5" stroke="#f5bb46" stroke-width="2.4"/><path d="M19.5 25.5H25" stroke="#ff7f5e" stroke-width="2.4"/></svg><span class="brand-name"><b>Hossein Basereh</b><small>Projects</small></span></a>
+      <p>Graduate coursework and engineering projects, shared as interactive pages. Each one is worked from first principles, with the notebooks on GitHub.</p>
+    </div>
+    <nav aria-label="Projects"><b>Projects</b><a href="https://hossbh.github.io/MAUT/">MAUT decision model</a><a href="https://hossbh.github.io/Probability-and-Statistics_SYS-501/">Probability & statistics</a><a href="https://hossbh.github.io/Data-Analysis_SYS-930/">Data analysis</a><a href="https://hossbh.github.io/Applied-Machine-Learning_AAI-695/">Applied machine learning</a></nav>
+    <nav aria-label="This project"><b>This project</b><a href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695">Source on GitHub</a><a href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695/blob/main/LICENSE">MIT License</a><a href="https://github.com/hossbh/Applied-Machine-Learning_AAI-695#readme">README</a></nav>
+    <nav aria-label="Elsewhere"><b>Elsewhere</b><a href="https://github.com/hossbh">GitHub profile</a><a href="https://beamworkbench.com">Engineering workbenches</a></nav>
+  </div>
+  <div class="wrap f-base"><span>© 2023–2026 Hossein Basereh · Code under the MIT License</span><span class="mono">Applied machine learning</span></div>
+</footer>
+<script src="assets/kit.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>
